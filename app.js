@@ -13,7 +13,6 @@ var _ = require("lodash");
 var path = require('path');
 const axios = require('axios');
 const fs = require('fs');
-const { forEach } = require("lodash");
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended:true}));
 // app.use(axios);
@@ -55,8 +54,6 @@ httpsServer.listen(4400, () => {
  
 app.listen(properties.port, (req, res) => {
     console.log(`Server is running on ${properties.port} port.`);
-
-    console.log(req);
 });
 
 app.use(function (req, res, next) {
@@ -70,9 +67,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-
- 
 app.use("/api", router);
+
 require("./app/routes/faqs.route")(router);
 require("./app/routes/user.route")(router);
 require("./app/routes/blog.route")(router);
